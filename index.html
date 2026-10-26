@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var t=localStorage.getItem('vh-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<title>VAULT HAC – Learn Technology. Master the Basics. Understand the Markets.</title>
+<meta name="description" content="VAULT HAC is an online learning platform for computer basics, cybersecurity awareness and beginner forex education, with video lessons on YouTube.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🛡️%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root,:root[data-theme=dark]{--bg:#0B0F14;--panel:#060a10;--line:#16314a;--cyan:#00D1FF;--rgb:0,209,255;--text:#eaf6ff;--mut:#9fb3c8;--btnText:#021018;--hbg:rgba(6,10,16,.95);color-scheme:dark}
+:root[data-theme=navy]{--bg:#060d1f;--panel:#02060f;--line:#12324f;--cyan:#22d3ee;--rgb:34,211,238;--text:#eaf6ff;--mut:#9db4c8;--btnText:#021018;--hbg:rgba(2,6,15,.95);color-scheme:dark}
+:root[data-theme=light]{--bg:#f3f7fb;--panel:#ffffff;--line:#c9d7e5;--cyan:#0066FF;--rgb:0,102,255;--text:#0B0F14;--mut:#43566b;--btnText:#ffffff;--hbg:rgba(255,255,255,.95);color-scheme:light}
+:root[data-theme=light] .hero h1,:root[data-theme=light] .logo,:root[data-theme=light] .btn{text-shadow:none!important;box-shadow:none!important}
+@media(prefers-color-scheme:light){:root:not([data-theme]){--bg:#f3f7fb;--panel:#ffffff;--line:#c9d7e5;--cyan:#0066FF;--rgb:0,102,255;--text:#0B0F14;--mut:#43566b;--btnText:#ffffff;--hbg:rgba(255,255,255,.95);color-scheme:light}:root:not([data-theme]) .hero h1,:root:not([data-theme]) .logo,:root:not([data-theme]) .btn{text-shadow:none!important;box-shadow:none!important}}
+select{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font:inherit;font-size:.85rem;margin-left:auto}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Inter,system-ui,sans-serif}
+h1,h2,h3,.logo{font-family:"Chakra Petch",system-ui,sans-serif;line-height:1.2}
+a{color:var(--cyan)}a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+header{position:sticky;top:0;z-index:5;background:var(--hbg);border-bottom:1px solid var(--line)}
+.bar{max-width:1100px;margin:auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
+.logo{font-weight:700;font-size:1.2rem;color:var(--cyan);text-decoration:none;text-shadow:0 0 12px rgba(var(--rgb),.6)}
+nav{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.9rem}nav a{color:var(--text);text-decoration:none;padding:4px 0}nav a:hover{color:var(--cyan)}
+section{max-width:1100px;margin:auto;padding:56px 16px}
+.hero{padding-top:72px;background:linear-gradient(rgba(var(--rgb),.06) 1px,transparent 1px) 0 0/100% 44px,linear-gradient(90deg,rgba(var(--rgb),.06) 1px,transparent 1px) 0 0/44px 100%}
+.hero h1{font-size:clamp(2rem,7vw,3.8rem);margin:0 0 18px;text-shadow:0 0 28px rgba(var(--rgb),.45);max-width:15em}
+.hero p{max-width:40em;color:var(--mut);font-size:1.05rem}
+.tag{color:var(--cyan);font-weight:600;margin:0 0 10px}
+h2{font-size:clamp(1.5rem,4vw,2.1rem);margin:0 0 8px}.sub{color:var(--mut);margin:0 0 24px;max-width:42em}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.btn{display:inline-block;padding:11px 18px;border-radius:6px;border:1px solid var(--cyan);color:var(--cyan);text-decoration:none;font-weight:600;background:transparent;cursor:pointer;font:inherit;font-weight:600}
+.btn.main{background:var(--cyan);color:var(--btnText);box-shadow:0 0 18px rgba(var(--rgb),.45)}.btn:hover{box-shadow:0 0 16px rgba(var(--rgb),.5)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px}
+.card h3{margin:0 0 8px;font-size:1.15rem}.card p{margin:0 0 10px;color:var(--mut)}.card ul{margin:0 0 14px;padding-left:20px;font-size:.95rem}
+.media{margin-top:auto}.thumb{position:relative;display:block;width:100%;padding:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;cursor:pointer;background:#000;aspect-ratio:16/9;margin-bottom:10px}
+.thumb img,iframe{width:100%;height:100%;display:block;object-fit:cover;border:0;border-radius:6px}iframe{aspect-ratio:16/9;margin-bottom:10px}
+.play{position:absolute;inset:0;display:grid;place-items:center;font-size:2.2rem;color:var(--cyan);text-shadow:0 0 14px #000}
+.soon{border:1px dashed var(--line);border-radius:6px;padding:14px;text-align:center;color:var(--mut);margin:0 0 10px}.vt{font-weight:600;color:var(--text)!important;margin:0 0 10px!important}
+h3.grp{margin:34px 0 14px;font-size:1.25rem;color:var(--cyan)}
+.warn{border-left:4px solid var(--cyan);background:var(--panel);padding:14px 16px;margin-top:26px;border-radius:0 6px 6px 0}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+form{display:grid;gap:12px;max-width:560px}label{font-weight:600;font-size:.9rem}
+input,textarea{width:100%;padding:11px;background:var(--panel);border:1px solid var(--line);border-radius:6px;color:var(--text);font:inherit}
+footer{border-top:1px solid var(--line);background:var(--panel);text-align:center;color:var(--mut);padding:28px 16px;font-size:.9rem}
+.empty{color:var(--mut)}
+form select{margin-left:0;width:100%;padding:11px}.msg{color:var(--cyan);margin:0}#g-faq{display:grid;gap:10px}summary{cursor:pointer;font-weight:600}details p{margin:10px 0 0}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="logo" href="#home"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:-4px;margin-right:6px" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><circle cx="12" cy="11" r="2"/></svg>VAULT HAC</a>
+<nav aria-label="Main"><a href="#home">Home</a><a href="#computer">Computer Basics</a><a href="#forex">Forex Education</a><a href="#videos">Video Lessons</a><a href="#channels">YouTube Channels</a><a href="#platforms">Platforms</a><a href="#help">Ask a Question</a><a href="#about">About</a><a href="#contact">Contact</a></nav><select id="theme" aria-label="Theme"><option value="auto">Theme: Auto</option><option value="dark">Dark</option><option value="light">Light</option><option value="navy">Midnight</option></select></div></header>
+<main>
+<section id="home" class="hero">
+<p class="tag">Protect. Innovate. Empower.</p>
+<h1>Learn Technology. Master the Basics. Understand the Markets.</h1>
+<p>Welcome to VAULT HAC, your online learning platform for computer basics, digital skills, cybersecurity awareness, and beginner forex trading education. Learn through simple lessons, practical demonstrations, and video tutorials.</p>
+<div class="row"><a class="btn main" href="#computer">Start Learning</a><a class="btn" href="#forex">Learn Forex Basics</a><a class="btn" href="https://www.youtube.com/@vaulthac" target="_blank" rel="noopener">Watch on YouTube</a></div>
+</section>
+
+<section id="latest"><h2>Latest Videos</h2><p class="sub">New uploads from both channels. Press play to watch here, or open the video on YouTube.</p>
+<h3 class="grp">VAULT HAC: Computer Skills and Forex Education</h3><div class="grid" id="l-hac"></div>
+<h3 class="grp">VAULT DISCOVERIES: Facts, Technology and Discoveries</h3><div class="grid" id="l-disc"></div></section>
+
+<section id="computer"><h2>Computer Basics Lessons</h2><p class="sub">Start here if you are new. Every lesson works on its own, so you can learn in any order.</p>
+<h3 class="grp">Computer Skills</h3><div class="grid" id="g-computer"></div>
+<h3 class="grp">Cybersecurity Awareness</h3><div class="grid" id="g-cyber"></div></section>
+
+<section id="forex"><h2>Forex Trading Education</h2><p class="sub">Beginner-friendly lessons on how the forex market works and how to manage risk.</p>
+<div class="grid" id="g-forex"></div>
+<p class="warn"><strong>Risk disclaimer:</strong> Forex trading carries substantial risk and you can lose money. Educational content does not guarantee profits. Practice on a demo account before using real money.</p></section>
+
+<section id="videos"><h2>Video Lessons</h2><p class="sub">Every lesson that has a matching video on the VAULT HAC channel.</p><div class="grid" id="g-videos"></div></section>
+
+<section id="channels"><h2>YouTube Channels</h2>
+<div class="two">
+<div class="card"><h3>VAULT HAC</h3><p>Computer basics, technology, cybersecurity awareness, digital education, and beginner forex support and resistance lessons.</p>
+<div class="row"><a class="btn main" href="https://www.youtube.com/@vaulthac" target="_blank" rel="noopener">Subscribe to VAULT HAC</a><a class="btn" href="https://www.youtube.com/@vaulthac/videos" target="_blank" rel="noopener">Watch Latest Videos</a><a class="btn" href="https://www.youtube.com/@vaulthac/playlists" target="_blank" rel="noopener">Explore Video Lessons</a></div></div>
+<div class="card"><h3>VAULT DISCOVERIES</h3><p>Amazing facts, technology discoveries, mysteries, fascinating places, rankings, and educational entertainment.</p>
+<div class="row"><a class="btn main" href="https://www.youtube.com/@vaultdiscoveries" target="_blank" rel="noopener">Subscribe to VAULT DISCOVERIES</a><a class="btn" href="https://www.youtube.com/@vaultdiscoveries" target="_blank" rel="noopener">Explore Discoveries</a><a class="btn" href="https://www.youtube.com/@vaultdiscoveries/videos" target="_blank" rel="noopener">Watch Videos</a></div></div>
+</div></section>
+
+<section id="platforms"><h2>Online Platforms</h2><p class="sub">Follow VAULT HAC on every platform. Same name everywhere: @VAULTHAC.</p><div class="grid" id="g-plat"></div></section>
+
+<section id="about"><h2>About VAULT HAC</h2><p class="tag">Protect. Innovate. Empower.</p>
+<p style="max-width:44em">VAULT HAC is an emerging technology and digital education brand that helps people learn, build, and stay safer online through responsible cybersecurity practices and practical teaching.</p>
+<p style="max-width:44em">“Vault” stands for protection and safeguarding valuable information. “HAC” stands for hacker, meaning an ethical hacker who works responsibly and with permission.</p>
+<div class="two" style="margin-top:20px"><div class="card"><h3>Our Vision</h3><p>To become a trusted and innovative technology brand that creates a safer digital world by advancing cybersecurity, developing useful technological solutions, and empowering people with practical digital skills.</p></div><div class="card"><h3>Our Mission</h3><p>To protect individuals and organizations from cyber threats through ethical and responsible cybersecurity practices; develop innovative technology solutions; and equip people with essential computer skills, programming knowledge, and digital awareness through accessible, practical education.</p></div></div>
+<h3 class="grp">Our Motto</h3>
+<div class="grid"><div class="card"><h3>Protect</h3><p>Help people safeguard their accounts, devices, information, and digital systems against cyber threats.</p></div><div class="card"><h3>Innovate</h3><p>Explore creative ideas and develop practical technology solutions through programming and continuous learning.</p></div><div class="card"><h3>Empower</h3><p>Teach people computer basics, programming, and responsible technology use so they can gain confidence and opportunity.</p></div></div>
+<h3 class="grp">Core Values</h3>
+<div class="grid"><div class="card"><h3>Integrity</h3><p>Do what is right, even when nobody is watching; be honest about skills and results.</p></div><div class="card"><h3>Hope</h3><p>Believe that learning, effort, and collaboration can improve the future.</p></div><div class="card"><h3>Determination</h3><p>Keep learning and improving through challenges and setbacks.</p></div><div class="card"><h3>Innovation</h3><p>Look for useful, creative, and effective ways to solve problems.</p></div><div class="card"><h3>Responsibility</h3><p>Respect privacy, permission, safety, and the law when using technology.</p></div><div class="card"><h3>Empowerment</h3><p>Share knowledge clearly and help other people build their skills.</p></div><div class="card"><h3>Excellence</h3><p>Aim for quality, accuracy, reliability, and continuous development.</p></div></div>
+<h3 class="grp">Main Areas of Focus</h3>
+<div class="grid"><div class="card"><h3>VAULT SECURE: Cybersecurity</h3><p>Cyber awareness, password security, phishing prevention, basic network security, and ethical hacking in authorized environments.</p></div><div class="card"><h3>VAULT TECH: Programming &amp; Innovation</h3><p>Computer programming, web development, app development, and practical projects that solve real problems.</p></div><div class="card"><h3>VAULT ACADEMY: Digital Education</h3><p>Beginner-friendly lessons in computer basics, digital literacy, programming fundamentals, internet safety, and responsible technology use.</p></div><div class="card"><h3>VAULT FINANCE: Optional Future Area</h3><p>Forex concepts, chart-reading basics, risk management, and demo-account learning. Kept separate from our cybersecurity work, and it never promises profits.</p></div></div>
+<h3 class="grp">Our Ethical Commitment</h3>
+<p class="warn" style="margin-top:0">VAULT HAC only tests systems when the owner has explicitly authorized the work. We respect privacy, protect sensitive information, disclose vulnerabilities responsibly, and follow applicable laws and platform rules. Our teaching focuses on prevention, safe demonstrations, legal practice labs, and responsible use.</p>
+<h3 class="grp">From the Founder</h3>
+<p style="max-width:44em">I am the founder and visionary behind VAULT HAC. As a BCSIT student, I am committed to learning, innovating, and using technology to make a positive difference. My passion is to protect people against cyber threats through ethical cybersecurity, develop practical technological solutions, and empower others with computer literacy and programming skills.</p>
+<p style="max-width:44em">I believe that knowledge creates opportunity, determination turns vision into action, and technology should be used responsibly to serve humanity.</p>
+<p class="warn" style="font-style:italic">“My journey begins with learning, grows through discipline, and aims to leave a lasting impact through technology.”</p>
+<p class="tag">Learn ethically. Innovate responsibly. Build a safer digital world.</p></section>
+
+<section id="help"><h2>Ask a Question or Report an Issue</h2><p class="sub">Stuck on a lesson, found a problem, or have a question? Send it here. Common answers are posted below.</p>
+<form id="qf" method="post"><div><label for="qt">Type</label><select id="qt" name="type"><option>Question</option><option>Issue or problem</option><option>Lesson request</option></select></div><div><label for="qn">Name (optional)</label><input id="qn" name="name"></div><div><label for="qe">Email (so we can reply)</label><input id="qe" name="email" type="email" required></div><div><label for="qm">Your message</label><textarea id="qm" name="message" rows="5" required></textarea></div><button class="btn main" type="submit">Send</button><p class="msg" role="status"></p></form>
+<h3 class="grp">Answered Questions</h3><div id="g-faq"></div></section>
+
+<section id="contact"><h2>Contact</h2>
+<p class="sub">Email <a href="mailto:vaulthac@gmail.com">vaulthac@gmail.com</a> or <a href="mailto:wankyarahman23@gmail.com">wankyarahman23@gmail.com</a>.<br>Channels: <a href="https://www.youtube.com/@vaulthac" target="_blank" rel="noopener">youtube.com/@vaulthac</a> and <a href="https://www.youtube.com/@vaultdiscoveries" target="_blank" rel="noopener">youtube.com/@vaultdiscoveries</a></p>
+<form id="cf" method="post"><div><label for="n">Name</label><input id="n" name="name" required></div><div><label for="e">Email</label><input id="e" name="email" type="email" required></div><div><label for="s">Subject</label><input id="s" name="subject" required></div><div><label for="m">Message</label><textarea id="m" name="message" rows="5" required></textarea></div><button class="btn main" type="submit">Send message</button><p class="msg" role="status"></p></form></section>
+
+<section id="privacy"><h2>Privacy</h2>
+<p style="max-width:44em;color:var(--mut)">This site does not use tracking cookies. YouTube videos load only after you press play, using YouTube’s privacy-enhanced player, and YouTube may then set its own cookies. Thumbnails are loaded from YouTube. Messages sent through the contact form are used only to reply to you.</p></section>
+</main>
+<footer>© VAULT HAC. Protect. Innovate. Empower.</footer>
+
+<script>
+let LESSONS=[],LATEST={hac:[],disc:[]},PLATFORMS=[],FAQS=[],FORM_ACTION="";
+let db=null,fs=null;
+const FB = {apiKey:"AIzaSyC1eHAw4SlWkldp7TYfOMVFrC3vPir6sLY",authDomain:"vaulthac-cb104.firebaseapp.com",projectId:"vaulthac-cb104",storageBucket:"vaulthac-cb104.firebasestorage.app",messagingSenderId:"594172120817",appId:"1:594172120817:web:7ef9c46604d63c25492350"};
+const G = "https://www.gstatic.com/firebasejs/10.14.1";
+
+
+const CH = {hac:"https://www.youtube.com/@vaulthac", disc:"https://www.youtube.com/@vaultdiscoveries"};
+const $ = s => document.querySelector(s);
+const esc = s => String(s||"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ytId = u => { const m = (u||"").match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([\w-]{11})/); return m ? m[1] : ""; };
+const watch = id => "https://www.youtube.com/watch?v=" + id;
+
+function thumb(id, label){
+  return `<button class="thumb" data-id="${id}" aria-label="Play video: ${esc(label)}"><img loading="lazy" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt=""><span class="play" aria-hidden="true">▶</span></button>`;
+}
+function lessonCard(l){
+  const id = ytId(l.video);
+  const media = id
+    ? thumb(id, l.videoTitle || l.title) + (l.videoTitle ? `<p class="vt">${esc(l.videoTitle)}</p>` : "") + `<a class="btn main" href="${watch(id)}" target="_blank" rel="noopener">Watch Lesson on YouTube</a>`
+    : `<p class="soon">Video coming soon</p>`;
+  return `<article class="card" id="${l.id}" style="display:flex;flex-direction:column"><h3>${esc(l.title)}</h3><p>${esc(l.text)}</p><ul>${l.goals.map(g => `<li>${esc(g)}</li>`).join("")}</ul><div class="media">${media}</div></article>`;
+}
+function fill(sel, html, emptyMsg){ $(sel).innerHTML = html || `<p class="empty">${emptyMsg}</p>`; }
+
+function render(){
+["computer","cyber","forex"].forEach(c => fill("#g-"+c, LESSONS.filter(l => l.cat === c).map(lessonCard).join(""), "Lessons coming soon."));
+fill("#g-videos", LESSONS.filter(l => ytId(l.video)).map(lessonCard).join(""), "Lessons with videos will appear here as soon as you add their YouTube links.");
+["hac","disc"].forEach(k => fill("#l-"+k, LATEST[k].map(v => {
+  const id = ytId(v.url); if(!id) return "";
+  return `<article class="card"><div class="media">${thumb(id, v.title)}</div><h3>${esc(v.title)}</h3>${v.date ? `<p>${esc(v.date)}</p>` : ""}<a class="btn main" href="${watch(id)}" target="_blank" rel="noopener">Watch Now</a></article>`;
+}).join(""), `No videos added yet. <a href="${CH[k]}/videos" target="_blank" rel="noopener">See the channel’s latest videos on YouTube</a>.`));
+
+fill("#g-plat", PLATFORMS.filter(p => p.live && p.url).map(p => `<article class="card"><h3>${esc(p.name)}</h3><p>${esc(p.handle)}</p>${p.url ? `<a class="btn" href="${esc(p.url)}" target="_blank" rel="noopener">Visit ${esc(p.name)}</a>` : `<p class="soon">Coming soon</p>`}</article>`).join(""), "Links coming soon.");
+
+fill("#g-faq", FAQS.map(f => `<details class="card"><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join(""), "No answered questions yet.");
+}
+
+const sel = $("#theme");
+sel.value = document.documentElement.dataset.theme || "auto";
+sel.addEventListener("change", () => {
+  const v = sel.value;
+  if (v === "auto") delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = v;
+  try { v === "auto" ? localStorage.removeItem("vh-theme") : localStorage.setItem("vh-theme", v); } catch (e) {}
+});
+
+document.addEventListener("click", e => {
+  const b = e.target.closest(".thumb"); if(!b) return;
+  const f = document.createElement("iframe");
+  f.src = "https://www.youtube-nocookie.com/embed/" + b.dataset.id + "?autoplay=1&rel=0";
+  f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true; f.title = "YouTube video player";
+  b.replaceWith(f);
+});
+
+function wire(f, label){
+  f.addEventListener("submit", async e => {
+    e.preventDefault();
+    const d = new FormData(f), out = f.querySelector(".msg");
+    if (db) {
+      try {
+        await fs.addDoc(fs.collection(db, "messages"), {type:d.get("type")||"Contact", name:d.get("name")||"", email:d.get("email")||"", subject:d.get("subject")||"", message:d.get("message")||"", created:fs.serverTimestamp()});
+        f.reset(); out.textContent = "Thank you. Your message was sent."; return;
+      } catch (_) {}
+    }
+    if (FORM_ACTION) {
+      try { const r = await fetch(FORM_ACTION, {method:"POST", body:d, headers:{Accept:"application/json"}}); if (r.ok) { f.reset(); out.textContent = "Thank you. Your message was sent."; return; } } catch (_) {}
+      out.textContent = "Could not send. Please email vaulthac@gmail.com instead."; return;
+    }
+    location.href = "mailto:vaulthac@gmail.com?subject=" + encodeURIComponent(label + ": " + (d.get("subject") || d.get("type") || "")) + "&body=" + encodeURIComponent(d.get("message") + "\n\nFrom: " + (d.get("name") || "") + " (" + d.get("email") + ")");
+  });
+}
+wire($("#cf"), "Contact"); wire($("#qf"), "Question");
+
+async function boot() {
+  let c = null;
+  try {
+    const A = await import(G + "/firebase-app.js");
+    fs = await import(G + "/firebase-firestore.js");
+    db = fs.getFirestore(A.initializeApp(FB));
+    const snap = await fs.getDoc(fs.doc(db, "site", "content"));
+    if (snap.exists()) c = JSON.parse(snap.data().json);
+  } catch (e) {}
+  if (!c) { try { const r = await fetch("content.json", {cache:"no-store"}); if (r.ok) c = await r.json(); } catch (e) {} }
+  if (c) { LESSONS = c.lessons || []; LATEST = c.latest || {hac:[], disc:[]}; PLATFORMS = c.platforms || []; FAQS = c.faqs || []; FORM_ACTION = c.formAction || ""; }
+  render();
+}
+boot();
+</script>
+</body>
+</html>
