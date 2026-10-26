@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>VAULT HAC Admin</title>
+<style>
+body{margin:auto;max-width:760px;padding:16px;background:#0B0F14;color:#eaf6ff;font:16px/1.5 system-ui,sans-serif}
+h1{color:#00D1FF;font-size:1.5rem;margin:0 0 6px}p{color:#9fb3c8;margin:6px 0}
+details{border:1px solid #16314a;border-radius:8px;margin:14px 0;background:#060a10;padding:0 12px}summary{cursor:pointer;font-weight:700;padding:12px 0;color:#00D1FF}
+.box{border-top:1px solid #16314a;padding:10px 0}label{display:block;font-size:.85rem;color:#9fb3c8;margin-top:8px}
+input,textarea,select{width:100%;padding:10px;background:#0B0F14;color:#eaf6ff;border:1px solid #16314a;border-radius:6px;font:inherit}
+input[type=checkbox]{width:auto;margin-right:8px}
+button{padding:10px 14px;margin:8px 8px 8px 0;border-radius:6px;border:1px solid #00D1FF;background:transparent;color:#00D1FF;font:inherit;font-weight:600;cursor:pointer}
+button.main{background:#00D1FF;color:#021018}button.del{border-color:#f87171;color:#f87171}
+.bar{position:sticky;bottom:0;background:#0B0F14;padding:8px 0;border-top:1px solid #16314a}#st{color:#00D1FF}
+[hidden]{display:none!important}
+</style></head><body>
+<h1>VAULT HAC Admin</h1>
+<p>Edit your videos, platforms and answered questions here. Nothing goes live until you upload the new <b>content.json</b> to your hosting.</p>
+<form id="login"><label>Email<input id="em" type="email" autocomplete="username" required></label><label>Password<input id="pw" type="password" autocomplete="current-password" required></label><button class="main" type="submit">Log in</button><p id="lerr" style="color:#f87171"></p></form>
+<div id="main" hidden>
+<label>Load content.json from your phone (only if it did not load by itself)<input type="file" id="file" accept=".json,application/json"></label>
+<p id="st" role="status"></p>
+<div id="app"></div>
+<div class="bar"><button class="main" id="sv">Save to website</button><button id="dl">Download backup</button><button id="cp">Copy JSON</button><button class="del" id="rs">Discard draft</button><button id="lo">Log out</button></div></div>
+<script>
+let C={lessons:[],latest:{hac:[],disc:[]},platforms:[],faqs:[],formAction:""};
+const $=s=>document.querySelector(s), DK="vh-admin-draft";
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const okLink=u=>!u||/(?:v=|youtu\.be\/|shorts\/|embed\/)[\w-]{11}/.test(u);
+const save=()=>{try{localStorage.setItem(DK,JSON.stringify(C))}catch(e){}};
+const inp=(p,l,v,t)=>`<label>${l}<input data-p="${p}" type="${t||"text"}" value="${esc(v)}"></label>`;
+function draw(){
+  const L=C.lessons.map((l,i)=>`<div class="box"><b>${esc(l.title)}</b>${inp(`lessons.${i}.video`,"YouTube link (exact video)",l.video)}${inp(`lessons.${i}.videoTitle`,"Video title",l.videoTitle)}<button class="del" data-a="rmL" data-i="${i}">Delete lesson</button></div>`).join("");
+  const V=k=>(C.latest[k]||[]).map((v,i)=>`<div class="box">${inp(`latest.${k}.${i}.url`,"YouTube link",v.url)}${inp(`latest.${k}.${i}.title`,"Title",v.title)}${inp(`latest.${k}.${i}.date`,"Date",v.date,"date")}<button class="del" data-a="rmV" data-k="${k}" data-i="${i}">Remove</button></div>`).join("")+`<button data-a="addV" data-k="${k}">Add video</button>`;
+  const P=C.platforms.map((p,i)=>`<div class="box">${inp(`platforms.${i}.name`,"Platform",p.name)}${inp(`platforms.${i}.handle`,"Handle",p.handle)}${inp(`platforms.${i}.url`,"Profile link (https://...)",p.url)}<label><input type="checkbox" data-p="platforms.${i}.live" ${p.live?"checked":""}>This account exists. Show it on the website</label><button class="del" data-a="rmP" data-i="${i}">Remove</button></div>`).join("")+`<button data-a="addP">Add platform</button>`;
+  const F=C.faqs.map((f,i)=>`<div class="box">${inp(`faqs.${i}.q`,"Question",f.q)}<label>Answer<textarea rows="3" data-p="faqs.${i}.a">${esc(f.a)}</textarea></label><button class="del" data-a="rmF" data-i="${i}">Remove</button></div>`).join("")+`<button data-a="addF">Add answered question</button>`;
+  $("#app").innerHTML=`<details open><summary>Lesson videos</summary>${L}<div class="box"><b>Add a new lesson</b>${inp("n.title","Title","")}<label>Group<select id="nc"><option value="computer">Computer basics</option><option value="cyber">Cybersecurity</option><option value="forex">Forex</option></select></label><label>Short explanation<textarea id="nt" rows="2"></textarea></label><label>Learning objectives (one per line)<textarea id="ng" rows="3"></textarea></label><button data-a="addL">Add lesson</button></div></details>
+<details><summary>Latest videos: VAULT HAC</summary>${V("hac")}</details>
+<details><summary>Latest videos: VAULT DISCOVERIES</summary>${V("disc")}</details>
+<details><summary>Online platforms</summary>${P}</details>
+<details><summary>Answered questions</summary>${F}</details>
+<details><summary>Visitor messages</summary><div id="msgs"></div></details>
+<details><summary>Message form link</summary><p>Paste your Formspree form link so visitor messages reach your email. Leave empty to use the visitor's email app.</p>${inp("formAction","Form link",C.formAction)}</details>`;showMsgs();
+}
+function setp(path,val){const k=path.split(".");let o=C;for(let i=0;i<k.length-1;i++)o=o[k[i]];o[k[k.length-1]]=val}
+$("#app").addEventListener("input",e=>{const p=e.target.dataset.p;if(!p)return;if(p==="n.title")return;setp(p,e.target.type==="checkbox"?e.target.checked:e.target.value);save()});
+$("#app").addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;const a=b.dataset.a,i=+b.dataset.i,k=b.dataset.k;
+  if(a==="rmL"&&confirm("Delete this lesson?"))C.lessons.splice(i,1);
+  else if(a==="rmV")C.latest[k].splice(i,1);
+  else if(a==="addV")(C.latest[k]=C.latest[k]||[]).unshift({url:"",title:"",date:""});
+  else if(a==="rmP")C.platforms.splice(i,1);
+  else if(a==="addP")C.platforms.push({name:"",handle:"",url:"",live:false});
+  else if(a==="rmF")C.faqs.splice(i,1);
+  else if(a==="addF")C.faqs.push({q:"",a:""});
+  else if(a==="addL"){const t=document.querySelector('[data-p="n.title"]').value.trim();if(!t){alert("Enter a lesson title.");return}
+    C.lessons.push({id:t.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")+"-"+Date.now().toString(36),cat:$("#nc").value,title:t,text:$("#nt").value.trim(),goals:$("#ng").value.split("\n").map(x=>x.trim()).filter(Boolean),channel:"hac",video:"",videoTitle:""})}
+  else if(a==="toFaq")C.faqs.push({q:M[i].message.slice(0,200),a:""});
+  else if(a==="rmM"){if(!confirm("Delete this message?"))return;fb.deleteDoc(fb.doc(db,"messages",M[i].id)).then(()=>{M.splice(i,1);showMsgs()}).catch(()=>alert("Could not delete."));return}
+  else return;
+  save();draw();
+});
+function problems(){const bad=[];C.lessons.forEach(l=>{if(!okLink(l.video))bad.push(l.title)});["hac","disc"].forEach(k=>(C.latest[k]||[]).forEach(v=>{if(!v.url||!okLink(v.url))bad.push(v.title||"A latest video")}));C.platforms.forEach(p=>{if(p.live&&!/^https:\/\//.test(p.url))bad.push(p.name+" is switched on but has no https link")});return bad}
+const out=()=>{const bad=problems();if(bad.length){alert("Fix these first:\n"+bad.join("\n"));return null}return JSON.stringify(C,null,1)};
+$("#dl").onclick=()=>{const j=out();if(!j)return;const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([j],{type:"application/json"}));a.download="content.json";a.click()};
+$("#cp").onclick=async()=>{const j=out();if(!j)return;try{await navigator.clipboard.writeText(j);$("#st").textContent="Copied."}catch(e){$("#st").textContent="Copy failed. Use Download instead."}};
+$("#rs").onclick=()=>{if(confirm("Discard your draft and reload from content.json?")){try{localStorage.removeItem(DK)}catch(e){}location.reload()}};
+$("#file").onchange=async e=>{try{C=JSON.parse(await e.target.files[0].text());save();$("#st").textContent="Loaded your file.";draw()}catch(x){$("#st").textContent="That file is not valid JSON."}};
+let M=[];
+function showMsgs(){const e=$("#msgs");if(!e)return;e.innerHTML=M.length?M.map((m,i)=>`<div class="box"><b>${esc(m.type)}</b> · ${esc(m.name||"No name")} · <a style="color:#00D1FF" href="mailto:${esc(m.email)}?subject=${encodeURIComponent("Re: "+(m.subject||m.type))}">${esc(m.email)}</a><p>${esc(m.message)}</p><button data-a="toFaq" data-i="${i}">Use as FAQ question</button><button class="del" data-a="rmM" data-i="${i}">Delete</button></div>`).join(""):"<p>No messages yet.</p>"}
+const FB = {apiKey:"AIzaSyC1eHAw4SlWkldp7TYfOMVFrC3vPir6sLY",authDomain:"vaulthac-cb104.firebaseapp.com",projectId:"vaulthac-cb104",storageBucket:"vaulthac-cb104.firebasestorage.app",messagingSenderId:"594172120817",appId:"1:594172120817:web:7ef9c46604d63c25492350"};
+const G = "https://www.gstatic.com/firebasejs/10.14.1";
+let db,au,fb,fa;
+async function start(){
+  try{const A=await import(G+"/firebase-app.js");fb=await import(G+"/firebase-firestore.js");fa=await import(G+"/firebase-auth.js");
+    const app=A.initializeApp(FB);db=fb.getFirestore(app);au=fa.getAuth(app);
+    fa.onAuthStateChanged(au,u=>{$("#login").hidden=!!u;$("#main").hidden=!u;if(u)load()})}
+  catch(e){$("#lerr").textContent="Could not load Firebase. Check your internet."}
+}
+async function load(){
+  let d=null;try{d=JSON.parse(localStorage.getItem(DK))}catch(e){}
+  if(d&&d.lessons&&confirm("Restore your unsaved draft from this phone?"))C=d;
+  else try{const s=await fb.getDoc(fb.doc(db,"site","content"));
+    if(s.exists()){C=JSON.parse(s.data().json);$("#st").textContent="Loaded your saved website content."}
+    else{const r=await fetch("content.json",{cache:"no-store"});C=await r.json();$("#st").textContent="Nothing saved online yet. Tap Save to website to publish this content."}}
+  catch(e){$("#st").textContent="Could not load content. Use the file picker above."}
+  draw();loadMsgs()
+}
+async function loadMsgs(){try{const q=await fb.getDocs(fb.query(fb.collection(db,"messages"),fb.orderBy("created","desc"),fb.limit(50)));M=q.docs.map(x=>({id:x.id,...x.data()}))}catch(e){M=[]}showMsgs()}
+$("#login").onsubmit=async e=>{e.preventDefault();try{await fa.signInWithEmailAndPassword(au,$("#em").value,$("#pw").value);$("#lerr").textContent=""}catch(x){$("#lerr").textContent="Wrong email or password."}};
+$("#lo").onclick=()=>fa.signOut(au);
+$("#sv").onclick=async()=>{const j=out();if(!j)return;try{await fb.setDoc(fb.doc(db,"site","content"),{json:j,updated:fb.serverTimestamp()});try{localStorage.removeItem(DK)}catch(e){}$("#st").textContent="Saved. Your website now shows these changes."}catch(e){$("#st").textContent="Save failed. Check that you are logged in and the database rules are set."}};
+start();
+</script></body></html>
